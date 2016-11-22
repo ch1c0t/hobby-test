@@ -1,0 +1,14 @@
+- request:
+    verb: get
+    path: /
+
+  response:
+    status: 200
+    body: root-only app
+
+- request:
+    verb: get
+    path: /non-existent
+
+  response:
+    status: 404
