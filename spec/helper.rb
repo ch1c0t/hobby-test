@@ -1,7 +1,7 @@
 require 'devtools/spec_helper'
 
-require_relative 'setup_power_assert'
-require_relative 'setup_mutant'
+require_relative 'setup/power_assert'
+require_relative 'setup/mutant'
 
 
 require_relative 'apps/Basic'
