@@ -21,11 +21,7 @@ module Hobby
                      Excon.new 'unix:///', socket: address
                    end
 
-      responses = @exchanges.map(&:request).map do |request|
-        connection.public_send request.verb, **request
-      end
-
-      Report.new @exchanges, responses
+      Report.new @exchanges.map &[:[], connection]
     end
   end
 end

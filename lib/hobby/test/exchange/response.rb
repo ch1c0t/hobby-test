@@ -4,5 +4,9 @@ class Hobby::Test::Exchange
       status == excon_response.status &&
         body == excon_response.body
     end
+
+    def body
+      super or ''
+    end
   end
 end

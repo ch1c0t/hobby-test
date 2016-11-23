@@ -1,8 +1,8 @@
 module Hobby
   class Test
     class Report
-      def initialize exchanges, responses
-        @exchanges = exchanges.zip(responses).map &Exchange
+      def initialize exchanges
+        @exchanges = exchanges
       end
       attr_reader :exchanges
 
@@ -16,5 +16,3 @@ module Hobby
     end
   end
 end
-
-require 'hobby/test/report/exchange'
