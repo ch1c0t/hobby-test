@@ -4,15 +4,14 @@ module Hobby
       def initialize exchanges
         @exchanges = exchanges
       end
-      attr_reader :exchanges
 
       def ok?
-        exchanges.all? &:passed?
+        @exchanges.all? &:passed?
       end
 
       include Enumerable
       extend Forwardable
-      delegate [:each, :[]] => :exchanges
+      delegate [:each, :[], :size] => :@exchanges
     end
   end
 end

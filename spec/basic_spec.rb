@@ -6,5 +6,6 @@ describe Basic do
     report = test['http://localhost:8080']
 
     assert { report.ok? }
+    assert { report.size == 2 }
   end
 end
