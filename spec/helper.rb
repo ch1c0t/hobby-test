@@ -1,33 +1,7 @@
 require 'devtools/spec_helper'
 
-require 'minitest'
-require 'minitest-power_assert'
-
-assert = if ENV['PRY']
-  require 'pry'
-  require 'awesome_print'
-
-  Module.new do
-    def assert &block
-      PowerAssert.start Proc.new, assertion_method: __method__ do |pa|
-        block.binding.pry unless pa.yield
-      end
-    end
-  end
-else
-  Minitest::PowerAssert::Assertions
-end
-
-Minitest::Assertions.prepend assert
-
-
-if defined? Mutant
-  class Mutant::Selector::Expression
-    def call _subject
-      integration.all_tests
-    end
-  end
-end
+require_relative 'setup_power_assert'
+require_relative 'setup_mutant'
 
 
 require_relative 'apps/Basic'
