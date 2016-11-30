@@ -9,6 +9,6 @@ gem 'awesome_print'
 gem 'puma'
 gem 'excon'
 gem 'to_proc'
-gem 'mutant', path: '../aliens/mutant'
+gem 'mutant'
 
 gemspec
