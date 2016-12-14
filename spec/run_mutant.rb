@@ -1,3 +1,20 @@
+# A workaround for
+# https://github.com/mbj/mutant/#the-crash--stuck-problem-mri
+#
+# For Hobby::Test::Report
+# https://gist.github.com/ch1c0t/c5e0a8de8de14d10bec49839fb6e2fee
+# this mutation
+# https://gist.github.com/ch1c0t/c1626fe232032489fad93dab8d3a10c0
+# causes the infinite running.
+#
+# This workaround "solves" it by introducing a timeout enforced
+# from the parent process.
+#
+# With this workaround, Mutant ends its run successfully, but lefts out
+# a process which keeps running in the background. That process, apparently,
+# is forked from the process with the offending mutation.
+# TODO: find out why it happens; create a workaround for the workaround
+# (because killing that process manually every time is too much hassle).
 require 'mutant'
 
 Runner = Mutant::Runner
