@@ -30,7 +30,7 @@ GEM
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
-    minitest (5.9.1)
+    minitest (5.10.1)
     minitest-power_assert (0.2.0)
       minitest
       power_assert
@@ -59,8 +59,11 @@ GEM
       procto (~> 0.0.2)
       regexp_parser (~> 0.3.6)
       unparser (~> 0.2.5)
+    mutant-rspec (0.8.11)
+      mutant (~> 0.8.11)
+      rspec-core (>= 3.4.0, < 3.6.0)
     parallel (1.10.0)
-    parser (2.3.3.0)
+    parser (2.3.3.1)
       ast (~> 2.2)
     power_assert (0.4.1)
     procto (0.0.3)
@@ -87,6 +90,7 @@ GEM
     slop (3.6.0)
     thread_safe (0.3.5)
     to_proc (0.0.5)
+    tra (0.0.1)
     unparser (0.2.5)
       abstract_type (~> 0.0.7)
       adamantium (~> 0.2.0)
@@ -107,10 +111,12 @@ DEPENDENCIES
   minitest
   minitest-power_assert
   mutant
+  mutant-rspec
   pry
   puma
   rspec
   to_proc
+  tra
 
 BUNDLED WITH
    1.13.6

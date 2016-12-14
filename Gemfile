@@ -10,5 +10,7 @@ gem 'puma'
 gem 'excon'
 gem 'to_proc'
 gem 'mutant'
+gem 'mutant-rspec'
+gem 'tra'
 
 gemspec
