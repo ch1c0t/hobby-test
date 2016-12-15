@@ -1,6 +1,6 @@
 require 'hobby'
 
-class Basic
+class MainApp
   include Hobby::App
   get { 'root-only app' }
 end
