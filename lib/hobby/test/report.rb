@@ -6,7 +6,7 @@ module Hobby
       end
 
       def ok?
-        @exchanges.all? &:passed?
+        @exchanges.all? &:ok?
       end
 
       include Enumerable

@@ -3,18 +3,27 @@ module Hobby
     class Exchange
       def initialize hash
         @request = Request.new hash['request']
-        @response = Response.new hash['response']
+        @asserts = hash['response'].map &Assert
       end
-      attr_reader :request, :response
+      attr_reader :request, :asserts
 
       def [] connection
-        response = connection.public_send request.verb, **request
-        Report.new self, response
+        dup.run_against connection
       end
+
+      def ok?
+        asserts.all? &:ok?
+      end
+
+      protected
+        def run_against connection
+          response = connection.public_send request.verb, **request
+          @asserts = asserts.map &[:[], response]
+          self
+        end
     end
   end
 end
 
 require 'hobby/test/exchange/request'
-require 'hobby/test/exchange/response'
-require 'hobby/test/exchange/report'
+require 'hobby/test/exchange/assert'
