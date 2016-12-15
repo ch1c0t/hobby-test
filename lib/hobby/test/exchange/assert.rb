@@ -1,7 +1,7 @@
 class Hobby::Test::Exchange
   class Assert
     def initialize pair
-      @key, @value = pair
+      @key, @expected_value = pair
     end
 
     def ok?
@@ -14,7 +14,8 @@ class Hobby::Test::Exchange
 
     protected
       def assert response
-        @ok = true if @value == (response.public_send @key)
+        @actual_value = response.public_send @key
+        @ok = @actual_value == @expected_value
         self
       end
   end

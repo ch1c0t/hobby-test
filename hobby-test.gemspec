@@ -5,4 +5,5 @@ Gem::Specification.new do |g|
   g.authors = ['Anatoly Chernow']
 
   g.add_dependency 'excon'
+  g.add_dependency 'to_proc'
 end

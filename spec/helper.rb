@@ -17,16 +17,11 @@ RSpec.configure do |config|
       sleep
     end
 
-    begin
-      fail unless File.exist? @socket
-    rescue
-      sleep 0.01
-      retry
-    end
+    sleep 0.01 until File.exist? @socket
   end
 
   config.after :each do 
     `kill #{@pid}`
-    sleep 0.01 if File.exist? @socket
+    sleep 0.01 while File.exist? @socket
   end
 end

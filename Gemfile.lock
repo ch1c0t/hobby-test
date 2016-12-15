@@ -3,6 +3,7 @@ PATH
   specs:
     hobby-test (0.0.0)
       excon
+      to_proc
 
 GEM
   remote: https://rubygems.org/
