@@ -11,4 +11,6 @@ class MainApp
     post { @@counter += 1 }
   end
   map('/counter') { run Counter.new }
+
+  get('/echo') { request.params }
 end

@@ -15,7 +15,7 @@ class Hobby::Test::Exchange
     protected
       def assert response
         @actual_value = response.public_send @key
-        @ok = @actual_value == @expected_value
+        @ok = @actual_value.to_s == @expected_value.to_s
         self
       end
   end

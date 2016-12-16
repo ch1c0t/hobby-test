@@ -1,0 +1,12 @@
+- request:
+    verb: get
+    path: /echo
+    query:
+      first: one
+      second: two
+
+  response:
+    status: 200
+    body:
+      first: one
+      second: two
