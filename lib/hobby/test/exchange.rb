@@ -3,7 +3,7 @@ module Hobby
     class Exchange
       def initialize hash
         @request = Request.new hash['request']
-        @asserts = hash['response'].map &Assert
+        @asserts = (hash['response']&.map &Assert) || []
       end
       attr_reader :request, :asserts
 

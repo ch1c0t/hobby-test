@@ -1,0 +1,14 @@
+- request:
+    verb: post
+    path: /counter
+
+- request:
+    verb: post
+    path: /counter
+
+- request:
+    verb: get
+    path: /counter
+
+  response:
+    body: '2'
