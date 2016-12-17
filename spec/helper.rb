@@ -5,15 +5,8 @@ require_relative 'apps/main'
 require 'hobby/test'
 require 'puma'
 
-module Helpers
-  def yml name
-    (Hobby::Test.new "spec/yml/#{name}.yml")[@socket]
-  end
-end
-
 RSpec.configure do |config|
   config.expect_with :rspec, :minitest
-  config.include Helpers
 
   config.before :each do |example|
     @socket = "MainApp.for.#{example}.socket"

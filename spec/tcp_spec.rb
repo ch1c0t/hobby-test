@@ -21,7 +21,7 @@ describe Hobby::Test do
   end
 
   it 'in case of success' do
-    test = described_class.new 'spec/yml/passing.0.yml'
+    test = described_class.new 'spec/yml/passing/0.yml'
     report = test['http://localhost:8080']
     assert { report.ok? }
   end
