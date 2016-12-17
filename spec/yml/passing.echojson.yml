@@ -1,0 +1,13 @@
+- request:
+    verb: get
+    path: /echo.json
+    query:
+      first: one
+      second: two
+
+  format: json
+  response:
+    status: 200
+    body:
+      first: one
+      second: two

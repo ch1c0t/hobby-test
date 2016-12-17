@@ -13,4 +13,6 @@ class MainApp
   map('/counter') { run Counter.new }
 
   get('/echo') { request.params }
+  require 'json'
+  get('/echo.json') { request.params.to_json }
 end

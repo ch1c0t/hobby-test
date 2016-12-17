@@ -1,10 +1,13 @@
 require 'helper'
 
 describe :format do
-  describe 'urlencoded by default' do
-    it 'works' do
-      report = yml 'passing.echo'
-      assert { report.ok? }
-    end
+  it 'urlencoded by default' do
+    report = yml 'passing.echo'
+    assert { report.ok? }
+  end
+
+  it "compares with #to_json when specified" do
+    report = yml 'passing.echojson'
+    assert { report.ok? }
   end
 end

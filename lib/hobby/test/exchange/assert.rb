@@ -1,7 +1,8 @@
 class Hobby::Test::Exchange
   class Assert
-    def initialize pair
-      @key, @expected_value = pair
+    def initialize key, value, format = :to_s
+      @key, @expected_value, @format = key, value, format
+      @format = "to_#{format}" unless format == :to_s
     end
 
     def ok?
@@ -15,7 +16,7 @@ class Hobby::Test::Exchange
     protected
       def assert response
         @actual_value = response.public_send @key
-        @ok = @actual_value.to_s == @expected_value.to_s
+        @ok = @actual_value.to_s == (@expected_value.public_send @format)
         self
       end
   end
