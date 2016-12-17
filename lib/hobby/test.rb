@@ -21,7 +21,7 @@ module Hobby
                      Excon.new 'unix:///', socket: address
                    end
 
-      Report.new @exchanges.map &[:[], connection]
+      Report.new @exchanges.map &[connection]
     end
   end
 end

@@ -20,7 +20,7 @@ module Hobby
       protected
         def run_against connection
           response = connection.public_send request.verb, **request
-          @asserts = asserts.map &[:[], response]
+          @asserts = asserts.map &[response]
           self
         end
     end
