@@ -1,4 +1,5 @@
 require 'hobby'
+require 'hobby/json'
 
 class MainApp
   include Hobby::App
@@ -12,6 +13,12 @@ class MainApp
   end
   map('/counter') { run Counter.new }
 
-  require 'json'
-  get('/echo') { request.params.to_json }
+  class Echo
+    include Hobby::App
+    include Hobby::JSON
+
+    get { json }
+  end
+  map('/echo') { run Echo.new }
+  get('/echo-with-query') { request.params.to_json }
 end

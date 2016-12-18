@@ -1,7 +1,20 @@
 - request:
     verb: get
-    path: /echo
+    path: /echo-with-query
     query:
+      first: one
+      second: two
+
+  response:
+    status: 200
+    body:
+      first: one
+      second: two
+
+- request:
+    verb: get
+    path: /echo
+    body:
       first: one
       second: two
 
