@@ -21,4 +21,10 @@ class MainApp
   end
   map('/echo') { run Echo.new }
   get('/echo-with-query') { request.params.to_json }
+
+  class Query
+    include Hobby::App
+    get { request.params['array'].class }
+  end
+  map('/query') { run Query.new }
 end

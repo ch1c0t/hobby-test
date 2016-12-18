@@ -1,0 +1,9 @@
+- request:
+    verb: get
+    path: /query
+    query:
+      array: [1, 2]
+
+  response:
+    status: 200
+    body: String
