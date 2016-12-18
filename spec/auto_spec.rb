@@ -5,7 +5,6 @@ describe 'passing and failing YAML specifications' do
     0
     counter
     echo
-    echojson
   ]
 
   failing = %w[

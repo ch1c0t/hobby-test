@@ -2,6 +2,7 @@ require 'to_proc/all'
 require 'excon'
 
 require 'yaml'
+require 'json'
 require 'forwardable'
 require 'ostruct'
 

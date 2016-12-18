@@ -1,8 +1,15 @@
 class Hobby::Test::Exchange
-  class Assert
-    def initialize key, value, format = :to_s
-      @key, @expected_value, @format = key, value, format
-      @format = "to_#{format}" unless format == :to_s
+  module Assert
+    def self.[] pair
+      const_get(pair[0].capitalize).new pair[1]
+    end
+
+    def initialize value
+      @expected_value = format value
+    end
+
+    def format value
+      value
     end
 
     def ok?
@@ -13,11 +20,34 @@ class Hobby::Test::Exchange
       dup.assert response
     end
 
+    attr_reader :actual_value, :expected_value
     protected
       def assert response
-        @actual_value = response.public_send @key
-        @ok = @actual_value.to_s == (@expected_value.public_send @format)
+        @actual_value = response.public_send self.class.key
+        @ok = actual_value == expected_value
         self
       end
+
+    def self.included assert
+      assert.extend Singleton
+    end
+
+    module Singleton
+      def key
+        to_s.split('::').last.downcase
+      end
+    end
+
+    class Status
+      include Assert
+    end
+
+    class Body
+      include Assert
+
+      def format value
+        value.is_a?(Hash) ? value.to_json : value.to_s
+      end
+    end
   end
 end
