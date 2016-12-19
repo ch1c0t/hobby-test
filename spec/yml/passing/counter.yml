@@ -1,13 +1,10 @@
-- request:
-    verb: post
+- post:
     path: /counter
 
-- request:
-    verb: post
+- post:
     path: /counter
 
-- request:
-    verb: get
+- get:
     path: /counter
 
   response:

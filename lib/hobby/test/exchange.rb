@@ -2,7 +2,9 @@ module Hobby
   class Test
     class Exchange
       def initialize hash
-        @request = Request.new hash['request']
+        @request = Request.new hash.find { |key, _|
+          Request::VERBS.include? key
+        }
         @asserts = (hash['response']&.map &Assert) || []
       end
       attr_reader :request, :asserts

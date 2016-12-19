@@ -1,5 +1,4 @@
-- request:
-    verb: get
+- get:
     path: /query
     query:
       array: [1, 2]

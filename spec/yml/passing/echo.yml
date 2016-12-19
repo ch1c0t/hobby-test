@@ -1,5 +1,4 @@
-- request:
-    verb: get
+- get:
     path: /echo-with-query
     query:
       first: one
@@ -11,8 +10,7 @@
       first: one
       second: two
 
-- request:
-    verb: get
+- get:
     path: /echo
     body:
       first: one
