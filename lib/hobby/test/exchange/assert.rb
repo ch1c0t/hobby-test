@@ -1,15 +1,13 @@
 class Hobby::Test::Exchange
   module Assert
     def self.[] pair
-      const_get(pair[0].capitalize).new pair[1]
+      key, delimiter, chain = pair[0].partition /\.|\[/
+      chain.prepend (delimiter == '[' ? 'self[' : 'self.') unless chain.empty?
+      const_get(key.capitalize).new key, chain, pair[1]
     end
 
-    def initialize value
-      @expected_value = format value
-    end
-
-    def format value
-      value
+    def initialize key, chain, value
+      @key, @chain, @specified_value = key, chain, value
     end
 
     def ok?
@@ -20,33 +18,44 @@ class Hobby::Test::Exchange
       dup.assert response
     end
 
-    attr_reader :actual_value, :expected_value
-    protected
-      def assert response
-        @actual_value = response.public_send self.class.key
-        @ok = actual_value == expected_value
-        self
-      end
-
-    def self.included assert
-      assert.extend Singleton
-    end
-
-    module Singleton
-      def key
-        to_s.split('::').last.downcase
-      end
-    end
+    attr_reader :actual_value, :specified_value, :chain, :key
 
     class Status
       include Assert
+
+      def assert response
+        @actual_value = response.public_send key
+        @ok = actual_value == specified_value
+        self
+      end
     end
 
     class Body
       include Assert
 
-      def format value
-        value.is_a?(Hash) ? value.to_json : value.to_s
+      def assert response
+        @actual_value = response.public_send key
+        @actual_value = begin
+                          JSON.parse actual_value
+                        rescue JSON::ParserError
+                          actual_value
+                        end
+
+        @ok = if chain.empty?
+                actual_value == specified_value
+              else
+                compare_chain
+              end
+
+        self
+      end
+
+      def compare_chain
+        if chain.end_with? '>', '=', '<'
+          actual_value.instance_eval "#{chain}(#{specified_value})"
+        else
+          (actual_value.instance_eval chain) == specified_value
+        end
       end
     end
   end

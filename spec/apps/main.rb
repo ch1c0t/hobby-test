@@ -27,4 +27,43 @@ class MainApp
     get { request.params['array'].class }
   end
   map('/query') { run Query.new }
+
+  class HashApp
+    include Hobby::App
+    include Hobby::JSON
+    get do
+      {
+        'a' => 1,
+        'b' => 2,
+        'c' => 3
+      }
+    end
+  end
+  map('/hash') { run HashApp.new }
+
+  class ArrayApp
+    include Hobby::App
+    include Hobby::JSON
+    get do
+      [
+        {
+          'first' => {
+            'a' => 0, 'b' => 1
+          },
+          'second' => {
+            'c' => 2, 'd' => 3
+          }
+        },
+        {
+          'first' => {
+            'a' => 5, 'b' => 6
+          },
+          'second' => {
+            'c' => 2, 'd' => 3
+          }
+        }
+      ]
+    end
+  end
+  map('/array') { run ArrayApp.new }
 end

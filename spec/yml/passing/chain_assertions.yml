@@ -1,0 +1,36 @@
+- get:
+    path: /hash
+
+  response:
+    body:
+      a: 1
+      b: 2
+      c: 3
+    body.>:
+      a: 1
+    body.size: 3
+    body['b']: 2
+
+- get:
+    path: /array
+
+  response:
+    body:
+      - first:
+          a: 0
+          b: 1
+        second:
+          c: 2
+          d: 3
+      - first:
+          a: 5
+          b: 6
+        second:
+          c: 2
+          d: 3
+    body.size: 2
+    body[1]['first']:
+      a: 5
+      b: 6
+    body[1]['first'].>:
+      a: 5
