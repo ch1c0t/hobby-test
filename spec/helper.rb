@@ -25,6 +25,6 @@ RSpec.configure do |config|
   end
 
   config.after :suite do
-    `rm *.socket`
+    `rm *.socket` unless Dir['*.socket'].empty?
   end
 end
