@@ -3,7 +3,7 @@
 
   response:
     status: 200
-    body: root-only app
+    body: root
 
 - get:
     path: /non-existent

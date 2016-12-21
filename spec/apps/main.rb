@@ -3,7 +3,7 @@ require 'hobby/json'
 
 class MainApp
   include Hobby::App
-  get { 'root-only app' }
+  get { 'root' }
 
   class Counter
     include Hobby::App

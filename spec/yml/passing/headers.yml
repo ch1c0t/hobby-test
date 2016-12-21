@@ -1,0 +1,10 @@
+- get:
+    path: /hash
+
+  response:
+    status: 200
+    headers:
+      Content-Length: "19"
+      Content-Type: application/json
+    headers.>:
+      Content-Type: application/json

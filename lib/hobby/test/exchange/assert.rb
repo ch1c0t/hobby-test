@@ -18,6 +18,14 @@ class Hobby::Test::Exchange
       dup.assert response
     end
 
+    def compare_chain
+      if chain.end_with? '>', '=', '<'
+        actual_value.instance_eval "#{chain}(#{specified_value})"
+      else
+        (actual_value.instance_eval chain) == specified_value
+      end
+    end
+
     attr_reader :actual_value, :specified_value, :chain, :key
 
     class Status
@@ -26,6 +34,16 @@ class Hobby::Test::Exchange
       def assert response
         @actual_value = response.public_send key
         @ok = actual_value == specified_value
+        self
+      end
+    end
+
+    class Headers
+      include Assert
+
+      def assert response
+        @actual_value = response.public_send key
+        @ok = chain.empty? ? actual_value == specified_value : compare_chain
         self
       end
     end
@@ -48,14 +66,6 @@ class Hobby::Test::Exchange
               end
 
         self
-      end
-
-      def compare_chain
-        if chain.end_with? '>', '=', '<'
-          actual_value.instance_eval "#{chain}(#{specified_value})"
-        else
-          (actual_value.instance_eval chain) == specified_value
-        end
       end
     end
   end
