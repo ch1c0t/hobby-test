@@ -3,7 +3,7 @@ require 'helper'
 describe 'passing and failing YAML specifications' do
   Dir["spec/yml/**/*.yml"].each do |path|
     name = path.split('/').last
-    test = Hobby::Test.new path
+    test = Hobby::Test.from_file path
 
     if path.include? 'passing'
       it "passing #{name}" do

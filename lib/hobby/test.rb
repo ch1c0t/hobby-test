@@ -11,8 +11,16 @@ require 'hobby/test/report'
 
 module Hobby
   class Test
-    def initialize file
-      @exchanges = (YAML.load_file file).map &Exchange
+    def self.from_file string
+      new YAML.load_file string
+    end
+
+    def self.from_string string
+      new YAML.load string
+    end
+
+    def initialize array_of_hashes
+      @exchanges = array_of_hashes.map &Exchange
     end
 
     def [] address
