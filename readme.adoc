@@ -1,6 +1,8 @@
 = hobby-test
 
-A way to test HTTP exchanges via YAML specifications. In contrast to {https://github.com/brynary/rack-test}[rack-test], it works via real HTTP requests, which makes it applicable to HTTP services written in any language, not only Ruby.
+:uri-for-rack-test: https://github.com/brynary/rack-test
+
+A way to test HTTP exchanges via YAML specifications. In contrast to {uri-for-rack-test}[rack-test], it works via real HTTP requests, which makes it applicable to HTTP services written in any language, not only Ruby.
 
 == How it works
 I'll write it later. For now, I just want to see how Github renders it.
