@@ -26,33 +26,34 @@ class Hobby::Test::Exchange
       end
     end
 
+    def assert response
+      @actual_value = response.public_send key
+      compare
+      self
+    end
+
     attr_reader :actual_value, :specified_value, :chain, :key
 
     class Status
       include Assert
 
-      def assert response
-        @actual_value = response.public_send key
+      def compare
         @ok = actual_value == specified_value
-        self
       end
     end
 
     class Headers
       include Assert
 
-      def assert response
-        @actual_value = response.public_send key
+      def compare
         @ok = chain.empty? ? actual_value == specified_value : compare_chain
-        self
       end
     end
 
     class Body
       include Assert
 
-      def assert response
-        @actual_value = response.public_send key
+      def compare
         @actual_value = begin
                           JSON.parse actual_value
                         rescue JSON::ParserError
@@ -64,8 +65,6 @@ class Hobby::Test::Exchange
               else
                 compare_chain
               end
-
-        self
       end
     end
   end
