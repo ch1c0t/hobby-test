@@ -8,6 +8,7 @@ require 'ostruct'
 
 require 'hobby/test/exchange'
 require 'hobby/test/report'
+require 'hobby/test/env'
 
 module Hobby
   class Test
@@ -29,8 +30,9 @@ module Hobby
                    else
                      Excon.new 'unix:///', socket: address
                    end
+      env = Env.new connection
 
-      Report.new @exchanges.map &[connection]
+      Report.new @exchanges.map &[env]
     end
   end
 end

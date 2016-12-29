@@ -9,8 +9,8 @@ module Hobby
       end
       attr_reader :request, :asserts
 
-      def [] connection
-        dup.run_against connection
+      def [] env
+        dup.execute_with env
       end
 
       def ok?
@@ -18,8 +18,8 @@ module Hobby
       end
 
       protected
-        def run_against connection
-          response = connection.public_send request.verb, **request
+        def execute_with env
+          response = env.connection.public_send request.verb, **request
           @asserts = asserts.map &[response]
           self
         end
