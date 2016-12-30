@@ -5,7 +5,7 @@
     body: "42"
 
 - get:
-    template.path: '"/for_last_response/#{last_response.body}"'
+    template.path: uri 'for_last_response', last_response.body
 
   response:
     body: "84"

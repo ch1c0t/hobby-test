@@ -8,6 +8,10 @@ module Hobby
       def last_response
         responses.last
       end
+
+      def uri *all
+        "/#{all.join '/'}"
+      end
     end
   end
 end
