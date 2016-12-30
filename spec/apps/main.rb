@@ -66,4 +66,11 @@ class MainApp
     end
   end
   map('/array') { run ArrayApp.new }
+
+  class ForLastResponse
+    include Hobby::App
+    post { 42 }
+    get '/:id' do my[:id].to_i * 2 end
+  end
+  map('/for_last_response') { run ForLastResponse.new }
 end

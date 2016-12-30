@@ -10,7 +10,7 @@ module Hobby
       attr_reader :request, :asserts
 
       def [] env
-        dup.execute_with env
+        dup.perform_in env
       end
 
       def ok?
@@ -18,9 +18,9 @@ module Hobby
       end
 
       protected
-        def execute_with env
-          response = env.connection.public_send request.verb, **request
-          @asserts = asserts.map &[response]
+        def perform_in env
+          request.perform_in env
+          @asserts = asserts.map &[env.last_response]
           self
         end
     end
@@ -29,3 +29,4 @@ end
 
 require 'hobby/test/exchange/request'
 require 'hobby/test/exchange/assert'
+require 'hobby/test/template'
