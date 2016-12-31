@@ -13,14 +13,21 @@ class Hobby::Test::Exchange
     end
     attr_reader :verb
 
-    def to_hash
+    def regular_fields body_serializer: nil
       hash = to_h
-      hash[:body] = hash[:body].to_json if hash[:body]
+
+      if body && body_serializer
+        hash[:body] = body_serializer.dump body
+      end
+
       hash
     end
 
     def perform_in env
-      params = to_hash.merge @templates.map(&[env]).to_h
+      body_serializer = JSON if body.is_a? Hash
+      params = regular_fields(body_serializer: body_serializer)
+        .merge @templates.map(&[env]).to_h
+
       env.responses << (env.connection.public_send verb, **params)
     end
   end
