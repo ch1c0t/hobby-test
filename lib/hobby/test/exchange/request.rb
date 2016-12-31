@@ -13,7 +13,7 @@ class Hobby::Test::Exchange
     end
     attr_reader :verb
 
-    def regular_fields body_serializer: nil
+    def regular_fields body_serializer:
       hash = to_h
 
       if body && body_serializer
@@ -27,8 +27,10 @@ class Hobby::Test::Exchange
       body_serializer = JSON if body.is_a? Hash
       params = regular_fields(body_serializer: body_serializer)
         .merge @templates.map(&[env]).to_h
-
-      env.responses << (env.connection.public_send verb, **params)
+      
+      excon_response = env.connection.public_send verb, **params
+      response = Response.new excon_response, body_serializer: body_serializer
+      env.responses << response
     end
   end
 end

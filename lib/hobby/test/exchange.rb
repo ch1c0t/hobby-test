@@ -28,5 +28,6 @@ module Hobby
 end
 
 require 'hobby/test/exchange/request'
+require 'hobby/test/exchange/response'
 require 'hobby/test/exchange/assert'
 require 'hobby/test/template'
