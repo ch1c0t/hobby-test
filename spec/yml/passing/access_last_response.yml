@@ -2,10 +2,10 @@
     path: /for_last_response
 
   response:
-    body: "42"
+    body: 42
 
 - get:
     template.path: uri 'for_last_response', last_response.body
 
   response:
-    body: "84"
+    body: 84

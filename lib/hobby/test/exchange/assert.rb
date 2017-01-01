@@ -54,11 +54,7 @@ class Hobby::Test::Exchange
       include Assert
 
       def compare
-        @actual_value = begin
-                          JSON.parse actual_value
-                        rescue JSON::ParserError
-                          actual_value
-                        end
+        @actual_value = JSON.load actual_value
 
         @ok = if chain.empty?
                 actual_value == specified_value

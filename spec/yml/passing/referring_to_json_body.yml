@@ -6,4 +6,4 @@
     
   response:
     status: 200
-    body: '2'
+    body: 2

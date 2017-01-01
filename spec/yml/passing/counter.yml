@@ -8,4 +8,4 @@
     path: /counter
 
   response:
-    body: "2"
+    body: 2

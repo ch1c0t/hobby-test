@@ -24,7 +24,7 @@ class Hobby::Test::Exchange
     end
 
     def perform_in env
-      body_serializer = JSON if body.is_a? Hash
+      body_serializer = JSON
       params = regular_fields(body_serializer: body_serializer)
         .merge @templates.map(&[env]).to_h
       

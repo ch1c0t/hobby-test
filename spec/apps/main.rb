@@ -2,11 +2,13 @@ require 'hobby'
 require 'hobby/json'
 
 class MainApp
-  include Hobby::App
+  include Hobby
+  include JSON
   get { 'root' }
 
   class Counter
-    include Hobby::App
+    include Hobby
+    include JSON
     @@counter = 0
     get { @@counter }
     post { @@counter += 1 }
@@ -20,10 +22,11 @@ class MainApp
     get { json }
   end
   map('/echo') { run Echo.new }
-  get('/echo-with-query') { request.params.to_json }
+  get('/echo-with-query') { request.params }
 
   class Query
-    include Hobby::App
+    include Hobby
+    include JSON
     get { request.params['array'].class }
   end
   map('/query') { run Query.new }
@@ -68,7 +71,8 @@ class MainApp
   map('/array') { run ArrayApp.new }
 
   class ForLastResponse
-    include Hobby::App
+    include Hobby
+    include JSON
     post { 42 }
     get '/:id' do my[:id].to_i * 2 end
   end
