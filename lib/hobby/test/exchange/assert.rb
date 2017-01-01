@@ -27,12 +27,13 @@ class Hobby::Test::Exchange
     end
 
     def assert response
+      @response = response
       @actual_value = response.public_send key
       compare
       self
     end
 
-    attr_reader :actual_value, :specified_value, :chain, :key
+    attr_reader :response, :actual_value, :specified_value, :chain, :key
 
     class Status
       include Assert
@@ -54,13 +55,8 @@ class Hobby::Test::Exchange
       include Assert
 
       def compare
-        @actual_value = JSON.load actual_value
-
-        @ok = if chain.empty?
-                actual_value == specified_value
-              else
-                compare_chain
-              end
+        @actual_value = response.format.load actual_value
+        @ok = chain.empty? ? actual_value == specified_value : compare_chain
       end
     end
   end

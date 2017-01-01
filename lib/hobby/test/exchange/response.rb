@@ -1,12 +1,12 @@
 class Hobby::Test::Exchange
   class Response
-    def initialize excon_response, body_serializer:
-      @excon_response, @body_serializer = excon_response, body_serializer
+    def initialize excon_response, format: JSON
+      @excon_response, @format = excon_response, format
     end
-    attr_reader :body_serializer
+    attr_reader :format
 
     def [] key
-      @serialized ||= JSON.load body
+      @serialized ||= format.load body
       @serialized[key]
     end
 
