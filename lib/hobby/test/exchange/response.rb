@@ -5,12 +5,15 @@ class Hobby::Test::Exchange
     end
     attr_reader :format
 
-    def [] key
-      @serialized ||= format.load body
-      @serialized[key]
+    def body
+      @body ||= if format
+                  format.load @excon_response.body
+                else
+                  @excon_response.body
+                end
     end
 
     extend Forwardable
-    delegate [:status, :headers, :body] => :@excon_response
+    delegate [:status, :headers] => :@excon_response
   end
 end

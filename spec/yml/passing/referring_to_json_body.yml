@@ -2,7 +2,7 @@
     path: /hash
 
 - get:
-    template.path: uri 'for_last_response', last_response['a']
+    template.path: uri 'for_last_response', last_response.body['a']
     
   response:
     status: 200

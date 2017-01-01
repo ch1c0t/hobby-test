@@ -1,14 +1,12 @@
 class Hobby::Test::Exchange
-  module Assert
-    def self.[] pair
+  class Assert
+    def initialize pair
       key, delimiter, chain = pair[0].partition /\.|\[/
       chain.prepend (delimiter == '[' ? 'self[' : 'self.') unless chain.empty?
-      const_get(key.capitalize).new key, chain, pair[1]
-    end
 
-    def initialize key, chain, value
-      @key, @chain, @specified_value = key, chain, value
+      @key, @chain, @specified_value = key, chain, pair[1]
     end
+    attr_reader :key, :chain, :specified_value, :actual_value
 
     def ok?
       @ok
@@ -18,46 +16,23 @@ class Hobby::Test::Exchange
       dup.assert response
     end
 
-    def compare_chain
-      if chain.end_with? '>', '=', '<'
-        actual_value.instance_eval "#{chain}(#{specified_value})"
-      else
-        (actual_value.instance_eval chain) == specified_value
+    protected
+      def assert response
+        @actual_value = response.public_send key
+        compare
+        self
       end
-    end
-
-    def assert response
-      @response = response
-      @actual_value = response.public_send key
-      compare
-      self
-    end
-
-    attr_reader :response, :actual_value, :specified_value, :chain, :key
-
-    class Status
-      include Assert
-
-      def compare
-        @ok = actual_value == specified_value
-      end
-    end
-
-    class Headers
-      include Assert
 
       def compare
         @ok = chain.empty? ? actual_value == specified_value : compare_chain
       end
-    end
 
-    class Body
-      include Assert
-
-      def compare
-        @actual_value = response.format.load actual_value
-        @ok = chain.empty? ? actual_value == specified_value : compare_chain
+      def compare_chain
+        if chain.end_with? '>', '=', '<'
+          actual_value.instance_eval "#{chain}(#{specified_value})"
+        else
+          (actual_value.instance_eval chain) == specified_value
+        end
       end
-    end
   end
 end
