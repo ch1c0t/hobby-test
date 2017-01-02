@@ -3,12 +3,10 @@ require 'hobby/json'
 
 class MainApp
   include Hobby
-  include JSON
   get { 'root' }
 
   class Counter
     include Hobby
-    include JSON
     @@counter = 0
     get { @@counter }
     post { @@counter += 1 }
@@ -22,11 +20,10 @@ class MainApp
     get { json }
   end
   map('/echo') { run Echo.new }
-  get('/echo-with-query') { request.params }
+  get('/echo-with-query') { request.params.to_json }
 
   class Query
     include Hobby
-    include JSON
     get { request.params['array'].class }
   end
   map('/query') { run Query.new }

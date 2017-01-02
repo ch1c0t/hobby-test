@@ -9,16 +9,18 @@ require 'ostruct'
 
 module Hobby
   class Test
-    def self.from_file string
-      new YAML.load_file string
+    def self.from_file string, **defaults
+      new (YAML.load_file string), defaults: defaults
     end
 
-    def self.from_string string
-      new YAML.load string
+    def self.from_string string, **defaults
+      new (YAML.load string), defaults: defaults
     end
 
-    def initialize array_of_hashes
-      @exchanges = array_of_hashes.map &Exchange
+    def initialize array_of_hashes, defaults: {}
+      @exchanges = array_of_hashes
+        .map(&[defaults, :merge])
+        .map(&Exchange)
     end
 
     def [] address

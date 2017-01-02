@@ -1,6 +1,6 @@
 class Hobby::Test::Exchange
   class Response
-    def initialize excon_response, format: JSON
+    def initialize excon_response, format:
       @excon_response, @format = excon_response, format
     end
     attr_reader :format
@@ -9,8 +9,14 @@ class Hobby::Test::Exchange
       @body ||= if format
                   format.load @excon_response.body
                 else
-                  @excon_response.body
+                  PlainBody.new @excon_response.body
                 end
+    end
+
+    class PlainBody < String
+      def == expected_response
+        eql? expected_response.to_s
+      end
     end
 
     extend Forwardable

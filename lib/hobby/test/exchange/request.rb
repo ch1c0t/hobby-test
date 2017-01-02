@@ -2,8 +2,8 @@ class Hobby::Test::Exchange
   class Request < OpenStruct
     include ToProc
     VERBS = %w[delete get head options patch post put]
-    def initialize pair
-      @verb, hash = pair
+    def initialize triple
+      @verb, hash, @format = triple
 
       template_fields, regular_fields = hash.partition &Key[:start_with?, 'template.']
       @templates = template_fields.map &Hobby::Test::Template
@@ -12,11 +12,11 @@ class Hobby::Test::Exchange
     end
     attr_reader :verb
 
-    def regular_fields body_serializer: JSON
+    def regular_fields
       hash = to_h
 
-      if body && body_serializer
-        hash[:body] = body_serializer.dump body
+      if body && @format
+        hash[:body] = @format.dump body
       end
 
       hash
@@ -25,7 +25,8 @@ class Hobby::Test::Exchange
     def perform_in env
       params = regular_fields.merge @templates.map(&[env]).to_h
       
-      response = Response.new (env.connection.public_send verb, **params)
+      excon_response = env.connection.public_send verb, **params
+      response = Response.new excon_response, format: @format
       env.responses << response
     end
   end
