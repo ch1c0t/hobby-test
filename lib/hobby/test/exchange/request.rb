@@ -1,12 +1,11 @@
 class Hobby::Test::Exchange
   class Request < OpenStruct
+    include ToProc
     VERBS = %w[delete get head options patch post put]
     def initialize pair
       @verb, hash = pair
 
-      template_fields, regular_fields = hash.partition do |key, _|
-        key.start_with? 'template.'
-      end
+      template_fields, regular_fields = hash.partition &Key[:start_with?, 'template.']
       @templates = template_fields.map &Hobby::Test::Template
 
       super regular_fields.to_h

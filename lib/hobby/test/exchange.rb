@@ -1,10 +1,10 @@
 module Hobby
   class Test
     class Exchange
+      include ToProc
+
       def initialize hash
-        @request = Request.new hash.find { |key, _|
-          Request::VERBS.include? key
-        }
+        @request = Request.new hash.find &Key[Request::VERBS, :include?]
         @asserts = (hash['response']&.map &Assert) || []
       end
       attr_reader :request, :asserts
