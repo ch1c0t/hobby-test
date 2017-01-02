@@ -1,8 +1,6 @@
 module Hobby
   class Test
     class Exchange
-      include ToProc
-
       def initialize hash
         @request = Request.new hash.find &Key[Request::VERBS, :include?]
         @asserts = (hash['response']&.map &Assert) || []

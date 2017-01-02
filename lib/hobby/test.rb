@@ -1,14 +1,11 @@
 require 'to_proc/all'
+require 'include_constants'
 require 'excon'
 
 require 'yaml'
 require 'json'
 require 'forwardable'
 require 'ostruct'
-
-require 'hobby/test/exchange'
-require 'hobby/test/report'
-require 'hobby/test/env'
 
 module Hobby
   class Test
@@ -34,5 +31,11 @@ module Hobby
 
       Report.new @exchanges.map &[env]
     end
+
+    include_constants from: ToProc
   end
 end
+
+require 'hobby/test/exchange'
+require 'hobby/test/report'
+require 'hobby/test/env'
