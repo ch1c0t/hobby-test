@@ -11,5 +11,6 @@ gem 'puma'
 gem 'mutant'
 gem 'mutant-rspec'
 gem 'tra'
+gem 'bgem'
 
 gemspec
