@@ -7,6 +7,9 @@ require 'to_proc/all'
 require 'include_constants'
 require 'excon'
 
+require 'hash/as/tree'
+using Hash::As::Tree
+
 include_constants from: ToProc
 
 def self.from_file string, **defaults

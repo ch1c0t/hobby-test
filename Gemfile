@@ -12,5 +12,6 @@ gem 'mutant'
 gem 'mutant-rspec'
 gem 'tra'
 gem 'bgem'
+gem 'hash-as-tree'
 
 gemspec
