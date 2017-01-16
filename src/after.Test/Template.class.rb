@@ -1,9 +1,7 @@
-def initialize pair
-  @key = pair.first.partition('.').last.to_sym
-  @string = pair.last
+def initialize string
+  @string = string
 end
 
 def [] env
-  value = env.instance_eval @string
-  [@key, value]
+  env.instance_eval @string
 end

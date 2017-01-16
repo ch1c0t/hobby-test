@@ -14,14 +14,8 @@ end
 private
   def create_params env
     serialize to_h.rewrite { |node|
-      next node unless node.value.is_a? String
-      string = node.value
-
-      if string.start_with?('(') && string.end_with?(')')
-        node.with value: (env.instance_eval string[1..-2])
-      else
-        node
-      end
+      next node unless node.value.is_a? Template
+      node.with value: node.value[env]
     }
   end
 
