@@ -26,6 +26,6 @@ end
 protected
   def perform_in env
     request.perform_in env
-    @asserts = asserts.map &[env.last_response]
+    @asserts = asserts.map &[env]
     self
   end

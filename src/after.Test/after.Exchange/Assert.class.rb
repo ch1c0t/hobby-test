@@ -15,8 +15,9 @@ def [] response
 end
 
 protected
-  def assert response
-    @actual_value = response.public_send key
+  def assert env
+    @specified_value = fill_templates_with env
+    @actual_value = env.last_response.public_send key
     compare
     self
   end
@@ -30,5 +31,24 @@ protected
       actual_value.instance_eval "#{chain}(#{specified_value})"
     else
       (actual_value.instance_eval chain) == specified_value
+    end
+  end
+
+  def fill_templates_with env
+    case specified_value
+    when Template
+      specified_value[env]
+    when Hash
+      specified_value.rewrite do |node|
+        value = node.value
+
+        if value.is_a? Template
+          node.with value: (value[env])
+        else
+          node
+        end
+      end
+    else
+      specified_value
     end
   end
