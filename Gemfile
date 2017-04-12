@@ -11,7 +11,7 @@ gem 'puma'
 gem 'mutant'
 gem 'mutant-rspec'
 gem 'tra'
-gem 'bgem'
+gem 'bgem', '>=0.0.9'
 gem 'hash-as-tree'
 
 gemspec
