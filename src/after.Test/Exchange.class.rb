@@ -16,16 +16,6 @@ end
 attr_reader :request, :asserts
 
 def [] env
-  dup.perform_in env
+  request.perform_in env
+  Report.new asserts.map &[env]
 end
-
-def ok?
-  asserts.all? &:ok?
-end
-
-protected
-  def perform_in env
-    request.perform_in env
-    @asserts = asserts.map &[env]
-    self
-  end

@@ -1,11 +1,11 @@
-def initialize exchanges
-  @exchanges = exchanges
+def initialize exchange_reports
+  @exchange_reports = exchange_reports
 end
 
 def ok?
-  @exchanges.all? &:ok?
+  @exchange_reports.all? &:ok?
 end
 
 include Enumerable
 extend Forwardable
-delegate [:each, :[], :size] => :@exchanges
+delegate [:each, :[], :size] => :@exchange_reports
