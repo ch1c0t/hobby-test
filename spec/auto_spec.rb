@@ -1,7 +1,7 @@
 require 'helper'
 
 describe 'passing and failing YAML specifications' do
-  Dir["spec/yml/json/*.yml"].each do |path|
+  Dir["spec/yml/passed/json/*.yml"].each do |path|
     name = path.split('/').last
     test = Hobby::Test.from_file path, format: JSON
 
@@ -11,7 +11,7 @@ describe 'passing and failing YAML specifications' do
     end
   end
 
-  Dir["spec/yml/plain/*.yml"].each do |path|
+  Dir["spec/yml/passed/plain/*.yml"].each do |path|
     name = path.split('/').last
     test = Hobby::Test.from_file path
 
