@@ -13,9 +13,8 @@ def initialize hash
   @request = Request.new [verb, params, *hash[:format]]
   @asserts = (hash['response']&.map &Assert) || []
 end
-attr_reader :request, :asserts
 
 def [] env
-  request.perform_in env
-  Report.new asserts.map &[env]
+  @request.perform_in env
+  Report.new @asserts.map &[env]
 end
