@@ -1,8 +1,18 @@
+using Module.new {
+  refine Object do
+    def template?
+      is_a?(String) &&
+        start_with?('(') &&
+        end_with?(')')
+    end
+  end
+}
+
 def initialize hash
   hash = hash.rewrite do |node|
     value = node.value
 
-    if value.is_a?(String) && value.start_with?('(') && value.end_with?(')')
+    if value.template?
       node.with value: (Template.new value[1..-2])
     else
       node
