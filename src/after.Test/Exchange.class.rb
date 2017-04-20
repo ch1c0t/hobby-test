@@ -13,7 +13,7 @@ def initialize hash
     value = node.value
 
     if value.template?
-      node.with value: (Template.new value[1..-2])
+      node.with value: (Template.new value)
     else
       node
     end
