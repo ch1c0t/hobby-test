@@ -26,5 +26,8 @@ end
 
 def [] env
   @request.perform_in env
-  Report.new @asserts.map &[env]
+  Report.new \
+    asserts: @asserts.map(&[env]),
+    request: @request,
+    response: env.last_response
 end

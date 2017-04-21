@@ -1,11 +1,7 @@
-def initialize asserts
-  @asserts = asserts
+def initialize asserts:, request:, response:
+  @asserts, @request, @response = asserts, request, response
 end
 
 def ok?
   @asserts.all? &:ok?
 end
-
-include Enumerable
-extend Forwardable
-delegate [:each, :[], :size] => :@asserts
