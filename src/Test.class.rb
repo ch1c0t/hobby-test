@@ -6,6 +6,8 @@ require 'ostruct'
 require 'to_proc/all'
 require 'include_constants'
 require 'excon'
+require 'terminal-table'
+require 'rainbow'
 
 require 'hash/as/tree'
 using Hash::As::Tree

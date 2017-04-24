@@ -8,4 +8,6 @@ Gem::Specification.new do |g|
   g.add_dependency 'excon'
   g.add_dependency 'to_proc', '>= 0.0.7'
   g.add_dependency 'include_constants'
+  g.add_dependency 'terminal-table'
+  g.add_dependency 'rainbow'
 end
