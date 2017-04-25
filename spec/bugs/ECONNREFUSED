@@ -1,0 +1,35 @@
+  1) passing and failing YAML specifications passing access_last_response.yml                                                   
+     Failure/Error: excon_response = env.connection.public_send verb, **(create_params env)                                             
+                                                                                                                                        
+     Excon::Error::Socket:                                                                                                              
+       Connection refused - connect(2) for 
+UNIX:4d:61:69:6e:41:70:70:2e:66:6f:72:2e:23:3c:52:53:70:65:63:3a:3a:43:6f:72:65:3a:3a:45:78:6
+1:6d:70:6c:65:20:22:70:61:73:73:69:6e:67:20:61:63:63:65:73:73:5f:6c:61:73:74:5f:72:65:73:70:6f:6e:73:65:2e:79:6d:6c:22:3e:2e:73:6f:63:6b
+:65:74 (Errno::ECONNREFUSED)                                                                                                            
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/unix_socket.rb:15:in `connect'                                          
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/socket.rb:29:in `initialize'                                            
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/connection.rb:401:in `new'                                              
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/connection.rb:401:in `socket'                                           
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/connection.rb:100:in `request_call'                                     
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/middlewares/mock.rb:48:in `request_call'                                
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/middlewares/instrumentor.rb:26:in `request_call'                        
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/middlewares/base.rb:16:in `request_call'                                
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/middlewares/base.rb:16:in `request_call'                                
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/middlewares/base.rb:16:in `request_call'                                
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/connection.rb:249:in `request'                                          
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/connection.rb:313:in `post'                                             
+     # ./lib/hobby/test.rb:190:in `public_send'                                                                                         
+     # ./lib/hobby/test.rb:190:in `perform_in'                                                                                          
+     # ./lib/hobby/test.rb:95:in `[]'                                                                                                   
+     # /home/ch1c0t/.gem/ruby/2.4.0/gems/to_proc-0.0.7/lib/to_proc/core/Array.rb:17:in `block in to_proc'                               
+     # ./lib/hobby/test.rb:50:in `map'                                                                                                  
+     # ./lib/hobby/test.rb:50:in `[]'                                                                                                   
+     # ./spec/integration_spec.rb:25:in `block (3 levels) in <top (required)>'                                                          
+     # ------------------                                                                                                               
+     # --- Caused by: ---                                                                                                               
+     # Errno::ECONNREFUSED:                                                                                                             
+     #   Connection refused - connect(2) for 
+UNIX:4d:61:69:6e:41:70:70:2e:66:6f:72:2e:23:3c:52:53:70:65:63:3a:3a:43:6f:72:65:3a:3a:45:78:61:6d:70:6c:65:20:22:70:61:73:73:69:6e:67:20:61:63:63:65:73:73:5f:6c:61:73:74:5f:72:65:73:70:6f:6e:73:65:2e:79:6d:6c:22:3e:2e:73:6f:63:6b:65:74                                                                                                                                
+     #   /home/ch1c0t/.gem/ruby/2.4.0/gems/excon-0.55.0/lib/excon/unix_socket.rb:15:in `connect'                                        
+                                                                                                                                        
+Finished in 0.6352 seconds (files took 0.37109 seconds to load)                        
