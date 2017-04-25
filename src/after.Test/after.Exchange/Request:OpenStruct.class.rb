@@ -1,4 +1,4 @@
-VERBS = %w[delete get head options patch post put]
+VERBS = %i[delete get head options patch post put]
 def initialize triple
   @verb, hash, @format = triple
   super hash

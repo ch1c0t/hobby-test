@@ -21,7 +21,7 @@ def initialize hash
 
   verb, params = hash.find &Key[Request::VERBS, :include?]
   @request = Request.new [verb, params, *hash[:format]]
-  @asserts = (hash['response']&.map &Assert) || []
+  @asserts = (hash[:response]&.map &Assert) || []
 end
 
 def [] env

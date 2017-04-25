@@ -22,8 +22,17 @@ def self.from_string string, **defaults
   new (YAML.load string), defaults: defaults
 end
 
+using Module.new {
+  refine Hash do
+    def symbolize_keys
+      map { |k, v| [k.to_sym, v] }.to_h
+    end
+  end
+}
+
 def initialize array_of_hashes, defaults: {}
   @exchanges = array_of_hashes
+    .map(&:symbolize_keys)
     .map(&[defaults, :merge])
     .map(&Exchange)
 end
