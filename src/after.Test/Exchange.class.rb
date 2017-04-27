@@ -25,9 +25,8 @@ def initialize hash
 end
 
 def [] env
-  @request.perform_in env
   Report.new \
+    request: (@request.perform_in env),
     asserts: @asserts.map(&[env]),
-    request: @request,
     response: env.last_response
 end
