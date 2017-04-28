@@ -19,3 +19,12 @@ end
 
 extend Forwardable
 delegate [:status, :headers] => :@excon_response
+
+def to_yaml
+ {
+    status: status,
+    headers: headers,
+    body: body,
+    format: format,
+ }.to_yaml
+end
