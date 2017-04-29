@@ -7,7 +7,7 @@ attr_reader :verb
 
 def perform_in env
   params = create_params env
-  report = Report.new params
+  report = Report.new params, @format
 
   excon_response = env.connection.public_send verb, **(serialize params)
 
@@ -36,8 +36,12 @@ private
   end
 
 class Report
-  def initialize params
-    @params = params
+  def initialize params, format
+    @params = params.dup
+
+    if format
+      @params[:format] = format
+    end
   end
 
   def to_yaml
