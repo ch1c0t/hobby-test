@@ -1,4 +1,6 @@
 def initialize pair
+  @pair = pair
+
   key, delimiter, chain = pair[0].partition /\.|\[/
   chain.prepend (delimiter == '[' ? 'self[' : 'self.') unless chain.empty?
 
@@ -12,6 +14,10 @@ end
 
 def [] response
   dup.assert response
+end
+
+def to_s
+  @pair.to_yaml
 end
 
 protected

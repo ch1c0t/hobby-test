@@ -13,6 +13,10 @@ def to_s
 
     t.add_row ['Request', @request.to_yaml]
     t.add_row ['Response', @response.to_yaml]
+    
+    unless exchange_report.ok?
+      t.add_row ['Failed', @asserts.map(&:to_s).join("\n\n")]
+    end
 
     t.style = { all_separators: true }
   end.to_s
