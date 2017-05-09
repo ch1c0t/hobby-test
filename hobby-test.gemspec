@@ -1,7 +1,7 @@
 Gem::Specification.new do |g|
   g.name    = 'hobby-test'
   g.files   = ['lib/hobby/test.rb']
-  g.version = '0.0.5'
+  g.version = '0.0.6'
   g.summary = 'A way to test HTTP exchanges via YAML specifications'
   g.authors = ['Anatoly Chernow']
 
