@@ -8,13 +8,13 @@ end
 
 def to_s
   Terminal::Table.new do |t|
-    status = exchange_report.ok? ? Rainbow('passed').green : Rainbow('failed').red
+    status = ok? ? Rainbow('passed').green : Rainbow('failed').red
     t.add_row ['Status', status]
 
     t.add_row ['Request', @request.to_yaml]
     t.add_row ['Response', @response.to_yaml]
     
-    unless exchange_report.ok?
+    unless ok?
       t.add_row ['Failed', @asserts.map(&:to_s).join("\n\n")]
     end
 
