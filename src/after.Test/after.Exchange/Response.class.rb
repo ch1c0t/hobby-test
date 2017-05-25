@@ -3,6 +3,15 @@ def initialize excon_response, format:
 end
 attr_reader :format
 
+def format= string
+  case string
+  when 'json' then JSON
+  when 'text' then nil
+  else
+    raise "Wrong format #{string}."
+  end
+end
+
 def body
   @body ||= if format
               format.load @excon_response.body

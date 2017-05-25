@@ -19,14 +19,23 @@ def initialize hash
     end
   end
 
+  response, global_format = hash.values_at :response, :format
   verb, params = hash.find &Key[Request::VERBS, :include?]
-  @request = Request.new verb, params, hash[:format]
-  @asserts = (hash[:response]&.map &Assert) || []
+
+  @response_format = response&.delete :format
+
+  @request = Request.new verb, params, global_format
+  @asserts = (response&.map &Assert) || []
 end
 
 def [] env
+  request_report = @request.perform_in env
+
+  response = env.last_response
+  response.format = @response_format if @response_format
+
   Report.new \
-    request: (@request.perform_in env),
-    asserts: @asserts.map(&[env]),
-    response: env.last_response
+    request: request_report,
+    response: response,
+    asserts: @asserts.map(&[env])
 end
