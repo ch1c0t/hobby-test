@@ -15,7 +15,11 @@ def to_s
     t.add_row ['Response', @response.to_yaml]
     
     unless ok?
-      t.add_row ['Failed', @asserts.map(&:to_s).join("\n\n")]
+      asserts = @asserts.map do |assert|
+        string = assert.to_s
+        assert.ok ? Rainbow(string).green : Rainbow(string).red
+      end
+      t.add_row ['Failed', asserts.join("\n\n")]
     end
 
     t.style = { all_separators: true }
