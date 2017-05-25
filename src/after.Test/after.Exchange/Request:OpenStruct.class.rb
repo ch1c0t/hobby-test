@@ -4,7 +4,7 @@ def initialize verb, params, format
 
   if local_format = params.delete('format')
     @format = case local_format
-              when 'json' then JSON
+              when 'json' then ::JSON
               when 'text' then nil
               else
                 raise "Wrong format #{local_format}."

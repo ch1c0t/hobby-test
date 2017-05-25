@@ -5,7 +5,7 @@ attr_reader :format
 
 def format= string
   case string
-  when 'json' then JSON
+  when 'json' then ::JSON
   when 'text' then nil
   else
     raise "Wrong format #{string}."
