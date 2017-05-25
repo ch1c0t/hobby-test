@@ -22,7 +22,7 @@ def initialize hash
   response, global_format = hash.values_at :response, :format
   verb, params = hash.find &Key[Request::VERBS, :include?]
 
-  @response_format = response&.delete :format
+  @response_format = response&.delete 'format'
 
   @request = Request.new verb, params, global_format
   @asserts = (response&.map &Assert) || []
