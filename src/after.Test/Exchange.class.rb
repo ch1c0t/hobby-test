@@ -20,7 +20,7 @@ def initialize hash
   end
 
   verb, params = hash.find &Key[Request::VERBS, :include?]
-  @request = Request.new [verb, params, *hash[:format]]
+  @request = Request.new verb, params, hash[:format]
   @asserts = (hash[:response]&.map &Assert) || []
 end
 

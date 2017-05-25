@@ -1,7 +1,19 @@
 VERBS = %i[delete get head options patch post put]
-def initialize triple
-  @verb, hash, @format = triple
-  super hash
+def initialize verb, params, format
+  @verb = verb
+
+  if local_format = params.delete('format')
+    @format = case local_format
+              when 'json' then JSON
+              when 'text' then nil
+              else
+                raise "Wrong format #{local_format}."
+              end
+  else
+    @format = format
+  end
+
+  super params
 end
 attr_reader :verb
 
