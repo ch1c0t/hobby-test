@@ -17,7 +17,7 @@ def to_s
     unless ok?
       asserts = @asserts.map do |assert|
         string = assert.to_s
-        assert.ok ? Rainbow(string).green : Rainbow(string).red
+        assert.ok? ? Rainbow(string).green : Rainbow(string).red
       end
       t.add_row ['Failed', asserts.join("\n\n")]
     end
