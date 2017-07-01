@@ -32,7 +32,7 @@ using Module.new {
 
 def initialize array_of_hashes, defaults: {}
   @exchanges = array_of_hashes
-    .map(&:symbolize_keys)
+    .map { |hash| hash.symbolize_keys }
     .map(&[defaults, :merge])
     .map(&Exchange)
 end
